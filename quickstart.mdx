@@ -21,8 +21,19 @@ You should already have your accounts setup for Resend, Fly.io and Stripe to mak
     locally by following these
     [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
     in your terminal.
+
+    Once you have cloned the repo, navigate to the root directory and open in VScode, run `npm i` to install all dependecies.
+
   </Accordion>
 </AccordionGroup>
+
+### Set up local SQlite Database
+
+If you've never setup a SQLite database before, we recommend checking out this [tutorial](https://www.sqlitetutorial.net/getting-started/what-is-sqlite/) to learn more about it.
+
+If you are using brew you can install sqlite with `brew install sqlite` and create a new database with `sqlite3 sqlite.db`.
+
+When you deploy your app, the dockerfile with let Fly will create it's own sqlite.db file.
 
 ### Set environment variables
 
@@ -34,10 +45,40 @@ You should already have your accounts setup for Resend, Fly.io and Stripe to mak
   </Accordion>
 </AccordionGroup>
 
+### Seed local SQlite with Prisma
+
+Now you have your .env file set, you can setup your local sqlite database by running first migration of prisma and seed the database with permissions, roles, and admin user.
+
+This seed file will also create products in your stripe dashboard. Please ensure you are using the `test` environment vairables for your stripe account until you are ready to go live!
+
+To see how the seed file works/make any changes navigate to the `prisma/seed.ts`
+
+`npx prisma migrate dev --name init` - will run the initial migration
+
+`npx prisma migrate reset` - this will force the seed.ts file to run and load your database with data.
+
+You should see success messages logged to the console.
+
+To check the seed has worked you can run `npx prisma studio` in a new terminal window to start a database UI and explore the tables and records created.
+
+### Start local environment
+
+If your data has been successfully seeded you can run `npm run dev` in the terminal to start your app.
+
+You can click one of the purchase buttons to test stripe checkout is correctly linked up.
+
+Or try login with `admin@admin.com` at [Login](http://localhost:3000/auth/login) no One time passcode is sent via email for admin user, you can grab the passcode from the terminal of the running app.
+
+### Launch a new Fly app
+
+Navigate terminal 2 to the root of your project and run `fly launch`. You can
+follow the prompts to create a new fly app.
+
+If you have not logged into fly through the CLI before you will be prompted to login.
+
 ### Deploy your changes
 
 <AccordionGroup>
-
 <Accordion icon="message-bot" title="Install our Github app">
   Our Github app automatically deploys your changes to your docs site, so you
   don't need to manage deployments yourself. You can find the link to install on
