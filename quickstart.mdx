@@ -22,7 +22,7 @@ You should already have your accounts setup for Resend, Fly.io and Stripe to mak
     [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
     in your terminal.
 
-    Once you have cloned the repo, navigate to the root directory and open in VScode, run `npm i` to install all dependecies.
+    Once you have cloned the repo, navigate to the root directory and open in VScode, run `npm i` to install all dependecies
 
   </Accordion>
 </AccordionGroup>
@@ -69,12 +69,22 @@ You can click one of the purchase buttons to test stripe checkout is correctly l
 
 Or try login with `admin@admin.com` at [Login](http://localhost:3000/auth/login) no One time passcode is sent via email for admin user, you can grab the passcode from the terminal of the running app.
 
+### Keeping Local and Production Stripe in sync
+
+The `prisma/seed.ts` should keep prices in sync for you.
+
+If you ever need to reset your database for a clean start locally you can run `npx prisma migrate reset --force`.
+This will remove all the data from the sqlite database and force the seed.ts file to run again.
+The seed.ts file will fetch products from stripe and populate your plans and products.
+
 ### Launch a new Fly app
 
-Navigate terminal 2 to the root of your project and run `fly launch`. You can
+Navigate in the terminal to the root of your project and run `fly launch`. You can
 follow the prompts to create a new fly app.
 
 If you have not logged into fly through the CLI before you will be prompted to login.
+
+In the Fly CLI you'll see your app being built from the dockerfile.
 
 ### Deploy your changes
 
