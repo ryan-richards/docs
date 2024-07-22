@@ -9,9 +9,25 @@ Learn how to pull the boring database repo and start building your own data serv
 
 ## Requirements
 
-You should already have your accounts setup for Resend, Fly.io and Stripe to make best use of this quick start guide.
+You should already have your accounts setup for Resend, Fly.io and Stripe so we can access the required envrionment variables for these services.
 
-### Edit and preview
+<CardGroup cols={3}>
+  <Card title="Emails" icon="envelope" href="https://mintlify.com/docs/resend">
+    Setup Resend for One-Time-Login code emails, and subscription success.
+  </Card>
+  <Card title="Stripe" icon="stripe" href="https://mintlify.com/docs/stripe">
+    Setup Stripe account for subscription payments and one-time payments.
+  </Card>
+  <Card title="Fly.io" icon="fly" href="https://mintlify.com/docs/stripe">
+    Setup Fly.io account and CLI for easy deployment.
+  </Card>
+</CardGroup>
+
+## Steps
+
+There a few steps to follow closely when setting up your boring database for the first time. But we should be up and running in no time!
+
+### Get the Repo
 
 <AccordionGroup>
   <Accordion icon="github" title="Clone the boring database repo">
@@ -40,8 +56,7 @@ When you deploy your app, the dockerfile with let Fly will create it's own sqlit
 <AccordionGroup>
   <Accordion icon="code" title="Set environment variables">
     Navigate to the .env in the repository and make sure you set your values for
-    the following: ``` STRIPE_PUBLIC_KEY="" STRIPE_SECRET_KEY="" RESEND_API_KEY"
-    ```
+    all the 3rd party services.
   </Accordion>
 </AccordionGroup>
 
@@ -84,60 +99,29 @@ follow the prompts to create a new fly app.
 
 If you have not logged into fly through the CLI before you will be prompted to login.
 
-In the Fly CLI you'll see your app being built from the dockerfile.
+In the Fly CLI you'll see your app being built from the dockerfile. Once it has been deployed you can run `fly apps open` in the terminal to open up a browser window with your new app.
 
-### Deploy your changes
+## Next Steps
 
-<AccordionGroup>
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+That covers the basics of getting your app setup, running locally and deploying to Fly.
 
-</AccordionGroup>
+When make any changes you can use `fly deploy` to rebuild and push your new changes to production.
 
-## Update your docs
+We can do better than that though! In our next step we will cover setting up a Github Action for running tests and deploying our app to fly automatically.
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+<CardGroup cols={2}>
+  <Card
+    title="Github Actions"
+    icon="github"
+    href="https://mintlify.com/docs/resend"
+  >
+    Configure your Github Actions for automatic deployment.
+  </Card>
+  <Card
+    title="Advanced Fly Tips"
+    icon="fly"
+    href="https://mintlify.com/docs/stripe"
+  >
+    Some handy tips for naviagting and maintaining your fly app.
+  </Card>
 </CardGroup>
