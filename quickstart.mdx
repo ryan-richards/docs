@@ -1,30 +1,36 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: "Quickstart"
+description: "Start building your boring database in 5 mins"
 ---
 
-## Setup your development
+## Setup your development environment
 
-Learn how to update your docs locally and and deploy them to the public.
+Learn how to pull the boring database repo and start building your own data service app.
+
+## Requirements
+
+You should already have your accounts setup for Resend, Fly.io and Stripe to make best use of this quick start guide.
 
 ### Edit and preview
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
+  <Accordion icon="github" title="Clone the boring database repo">
+    Ensure you have added your github profile through the boringdatabase
+    dashboard. [dashboard](https://boringdatabase.com/dashboard/repo). If you
+    have successfully been added as a collaborator, you can clone the repository
+    locally by following these
     [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
     in your terminal.
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+</AccordionGroup>
+
+### Set environment variables
+
+<AccordionGroup>
+  <Accordion icon="code" title="Set environment variables">
+    Navigate to the .env in the repository and make sure you set your values for
+    the following: ``` STRIPE_PUBLIC_KEY="" STRIPE_SECRET_KEY="" RESEND_API_KEY"
+    ```
   </Accordion>
 </AccordionGroup>
 
