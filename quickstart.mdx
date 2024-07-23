@@ -12,13 +12,13 @@ Learn how to pull the boring database repo and start building your own data serv
 You should already have your accounts setup for Resend, Fly.io and Stripe so we can access the required envrionment variables for these services.
 
 <CardGroup cols={3}>
-  <Card title="Emails" icon="envelope" href="https://mintlify.com/docs/resend">
+  <Card title="Emails" icon="envelope" href="/emails/resend">
     Setup Resend for One-Time-Login code emails, and subscription success.
   </Card>
-  <Card title="Stripe" icon="stripe" href="https://mintlify.com/docs/stripe">
+  <Card title="Stripe" icon="stripe" href="payments/stripe">
     Setup Stripe account for subscription payments and one-time payments.
   </Card>
-  <Card title="Fly.io" icon="fly" href="https://mintlify.com/docs/stripe">
+  <Card title="Fly.io" icon="fly" href="/deploy/fly">
     Setup Fly.io account and CLI for easy deployment.
   </Card>
 </CardGroup>
@@ -27,7 +27,7 @@ You should already have your accounts setup for Resend, Fly.io and Stripe so we 
 
 There a few steps to follow closely when setting up your boring database for the first time. But we should be up and running in no time!
 
-### Get the Repo
+### 1. Get the Repo
 
 <AccordionGroup>
   <Accordion icon="github" title="Clone the boring database repo">
@@ -43,7 +43,7 @@ There a few steps to follow closely when setting up your boring database for the
   </Accordion>
 </AccordionGroup>
 
-### Set up local SQlite Database
+### 2. Set up local SQlite Database
 
 If you've never setup a SQLite database before, we recommend checking out this [tutorial](https://www.sqlitetutorial.net/getting-started/what-is-sqlite/) to learn more about it.
 
@@ -51,7 +51,7 @@ If you are using brew you can install sqlite with `brew install sqlite` and crea
 
 When you deploy your app, the dockerfile with let Fly will create it's own sqlite.db file.
 
-### Set environment variables
+### 3. Set environment variables
 
 <AccordionGroup>
   <Accordion icon="code" title="Set environment variables">
@@ -60,7 +60,7 @@ When you deploy your app, the dockerfile with let Fly will create it's own sqlit
   </Accordion>
 </AccordionGroup>
 
-### Seed local SQlite with Prisma
+### 4. Seed local SQlite with Prisma
 
 Now you have your .env file set, you can setup your local sqlite database by running first migration of prisma and seed the database with permissions, roles, and admin user.
 
@@ -76,7 +76,7 @@ You should see success messages logged to the console.
 
 To check the seed has worked you can run `npx prisma studio` in a new terminal window to start a database UI and explore the tables and records created.
 
-### Start local environment
+### 5. Start local environment
 
 If your data has been successfully seeded you can run `npm run dev` in the terminal to start your app.
 
@@ -84,7 +84,13 @@ You can click one of the purchase buttons to test stripe checkout is correctly l
 
 Or try login with `admin@admin.com` at [Login](http://localhost:3000/auth/login) no One time passcode is sent via email for admin user, you can grab the passcode from the terminal of the running app.
 
-### Keeping Local and Production Stripe in sync
+## Going live
+
+By this point you should be able to go ahead and customize your boring database app, adding a custom landing page and loading in your dataset.
+
+But when you are ready to deploy for the first time here are the steps:
+
+### 1. Keeping Local and Production Stripe in sync
 
 The `prisma/seed.ts` should keep prices in sync for you.
 
@@ -92,7 +98,7 @@ If you ever need to reset your database for a clean start locally you can run `n
 This will remove all the data from the sqlite database and force the seed.ts file to run again.
 The seed.ts file will fetch products from stripe and populate your plans and products.
 
-### Launch a new Fly app
+### 2. Launch a new Fly app
 
 Navigate in the terminal to the root of your project and run `fly launch`. You can
 follow the prompts to create a new fly app.
@@ -110,18 +116,10 @@ When make any changes you can use `fly deploy` to rebuild and push your new chan
 We can do better than that though! In our next step we will cover setting up a Github Action for running tests and deploying our app to fly automatically.
 
 <CardGroup cols={2}>
-  <Card
-    title="Github Actions"
-    icon="github"
-    href="https://mintlify.com/docs/resend"
-  >
+  <Card title="Github Actions" icon="github" href="/deploy/github">
     Configure your Github Actions for automatic deployment.
   </Card>
-  <Card
-    title="Advanced Fly Tips"
-    icon="fly"
-    href="https://mintlify.com/docs/stripe"
-  >
+  <Card title="Advanced Fly Tips" icon="fly" href="/deploy/tips">
     Some handy tips for naviagting and maintaining your fly app.
   </Card>
 </CardGroup>
