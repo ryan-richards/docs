@@ -1,0 +1,31 @@
+---
+title: "Stripe setup"
+description: "Setting Up Stripe and Accessing Test API Keys"
+icon: "stripe-s"
+---
+
+## 1. Create a Stripe Account
+
+Go to [stripe.com](https://stripe.com) and sign up for an account.
+
+## 2. Access the Dashboard
+
+After signing in, you'll be in the Stripe Dashboard.
+
+## 3. Switch to Test Mode
+
+Look for the toggle switch in the top-right corner of the Dashboard. Make sure it's set to "Test mode".
+
+## 4. Find Your API Keys
+
+1. In the Dashboard sidebar, click on "Developers"
+2. Select "API keys"
+
+You'll see two types of keys:
+
+- Publishable key: Starts with `pk_test_`
+- Secret key: Starts with `sk_test_`
+
+## 5. Using the Keys
+
+Copy the keys into the `.env` file for `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY`

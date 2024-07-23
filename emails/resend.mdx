@@ -1,0 +1,35 @@
+---
+title: "Setting up Resend"
+description: "Setting Up Resend Email Service"
+icon: "envelope"
+---
+
+## Introduction
+
+Resend is a modern email API service that allows developers to send transactional emails easily.
+This guide will walk you through the process of setting up and using Resend in your application.
+
+## Prerequisites
+
+- A Resend account
+- An API key from Resend
+- A verified domain (for production use)
+
+## Step 1: Sign Up for Resend
+
+1. Go to [Resend's website](https://resend.com)
+2. Click on "Sign Up" and create an account
+
+## Step 2: Obtain API Key
+
+1. Log in to your Resend dashboard
+2. Navigate to the API Keys section
+3. Generate a new API key
+4. Copy Key and enter in `.env` file for `RESEND_API_KEY`
+
+## Step 3: Verify Your Domain (for production)
+
+1. In the Resend dashboard, go to the Domains section
+2. Click "Add Domain"
+3. Follow the provided instructions to add DNS records
+4. Wait for domain verification (usually takes a few minutes)

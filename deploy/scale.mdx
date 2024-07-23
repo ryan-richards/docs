@@ -1,0 +1,54 @@
+---
+title: "Scaling your App"
+description: "How to scale your application"
+icon: "up-right-and-down-left-from-center"
+---
+
+Once you have deployed your app and are ready to launch you will probably want to disable auto-scaling to 0 and beed up your machine to handle more traffic.
+
+You will likely see a warning on your fly dashboard stating - "Your app is currently running on a single machine
+To ensure high availability, especially for production apps, we'd strongly recommend running at least 2 machines"
+
+As we are using sqlite there is no built in data replication so we have to use 1 machine!
+
+We can however improve the single machine by bumping up the RAM or CPU count - note this will have affect on price.
+
+## Disable auto-stop-machines
+
+By default your `fly.toml` is set to shut down the machine after a period of inactvity.
+This is useful during development but once you launch it much better to avoid the cold start time of starting up the machine when someone hits your url.
+
+### 1. Navigate to your `fly.toml`
+
+Update http_service to:
+
+```
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+```
+
+Fly will now keep your machine running until stopped. But will automatically restart the machine if it crashes for any reason.
+
+## Scale up RAM or CPU count
+
+You can safely change the ram or cpu count to a higher number to handle more traffic. (e.g during a launch week)
+
+### 1. Navigate to your `fly.toml`
+
+Update vm to :
+
+```
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 2
+```
+
+## Future improvements
+
+[LiteFs](https://fly.io/docs/litefs/) is a solution for Sqlite replication. I'm currently working on implementing this into the boring database repository so keep an eye out!

@@ -1,0 +1,33 @@
+---
+title: "Fly Machine Tips"
+description: "Some useful tips for managing your fly machine"
+icon: "arrow-pointer"
+---
+
+Once your app is up and running and you have setup a github action for automatic deployments, you shouldnt need to do any maintence to your fly machine.
+
+However you may find some of these tips handy!
+
+## Tips
+
+### Take copy of Production Database
+
+You might find it useful to take a copy of your production database for debugging in your local environment
+
+```bash
+fly ssh sftp get -a yourappname /data/sqlite.db sqlite.db
+```
+
+### SSH access to your fly machine
+
+```bash
+fly ssh console
+```
+
+### SFTP console access to your fly machine
+
+```bash
+fly ssh sftp shell
+```
+
+Useful for pushing a copy of your local sqlite.db to production!

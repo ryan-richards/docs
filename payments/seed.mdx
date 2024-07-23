@@ -1,0 +1,45 @@
+---
+title: "Seeding Stripe Products"
+description: "Setting up your stripe products"
+icon: "seedling"
+---
+
+The `prisma/seed.ts` seed file synchronizes Stripe products and prices with a local database.
+
+You should make chnages to the `app/modules/stripe/plans.ts` file this is where you can set plan details, like name and prices for different currencies.
+
+When you first run `npx prisma migrate dev --name init` the `seed.ts` file will run and populate your local database with users and roles.
+Plus it will contact stripe and create products and prices for you.
+
+The `seed.ts` file is designed to keep your local or production database in sync with Stripe, with Stripe acting as the source of truth.
+
+Here's how the seed file works:
+
+## 1. Update or Create Existing Products
+
+The `updateOrCreateProducts` function:
+
+- Fetches all products from Stripe
+- For each product:
+  - Retrieves its prices from Stripe
+  - Updates or creates a corresponding record in the local database
+  - Synchronizes the product's prices in the database
+
+## 2. Create New Products
+
+The `createNewProducts` function:
+
+- Checks for products defined in `PRICING_PLANS` that don't exist in Stripe
+- For each new product:
+  - Creates the product in Stripe
+  - Creates associated prices in Stripe
+  - Adds the product and its prices to the local database
+
+## Key Points
+
+- Uses Stripe API to fetch and create products and prices
+- Uses Prisma ORM to interact with the local database
+- Handles both one-time ('lifetime') and recurring price models
+- Ensures database reflects the current state of products in Stripe
+
+After running this seed file, your local database will be in sync with your Stripe account's products and prices.

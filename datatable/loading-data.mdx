@@ -1,0 +1,38 @@
+---
+title: "Load your dataset"
+description: "How to add your dataset"
+icon: "database"
+---
+
+Once you have your app running you will want to load your dataset into the application. You have a few options for this!
+
+## Options
+
+### Use an API route
+
+You could choose to use an API endpoint to handle a bulk `POST` request of data.
+
+I have included and example endpoint for bulk loading a CSV file in the repository.
+
+You will have to make adjustments to handle your data.
+
+### Load data in the seed.ts
+
+Another option is to load your dataset in the `seed.ts` file.
+
+You'll notice there is a `faker.js` implementation that loads 500 dummy records into the database.
+
+You could replcace this with your real dataset, either loaded from a CSV file or a JSON array of objects.
+
+### Manually add new records in Admin Panel
+
+If you dont have any data to start with you can use the admin panel avaiable when you login with `admin@admin.com`
+
+You can adjust this form to suit your data and manually add new records as you need them!
+
+### Extend the Admin panel to accept CSV upload
+
+You could extend the current admin panel view to allow CSV file upload to bulk upload new records.
+Copy the logic in the provided API route for bulk upload to get a head start.
+
+I'm working on adding this into the repo so watch this space!

@@ -1,0 +1,77 @@
+---
+title: "Setup Fly"
+description: "Get started with Fly.io for deployment"
+icon: "fly"
+---
+
+This guide will walk you through the process of creating and setting up a Fly.io account.
+
+## 1. Sign Up
+
+1. Visit [fly.io](https://fly.io/)
+2. Click on the "Sign Up" button in the top right corner
+3. Choose your preferred sign-up method:
+   - Email and password
+   - GitHub
+   - Google
+
+## 2. Verify Your Email
+
+If you signed up with email, check your inbox for a verification email and click the link to verify your account.
+
+## 3. Install Flyctl
+
+Flyctl is the command-line tool for managing Fly.io apps.
+
+### On macOS:
+
+```bash
+brew install flyctl
+```
+
+### On Linux:
+
+```bash
+curl -L https://fly.io/install.sh | sh
+```
+
+### On Windows:
+
+```powershell
+iwr https://fly.io/install.ps1 -useb | iex
+```
+
+## 4. Log In to Flyctl
+
+In your terminal, run:
+
+```bash
+fly auth login
+```
+
+Follow the prompts to complete the login process.
+
+## 5. Add a Payment Method
+
+1. Go to the [Billing section](https://fly.io/dashboard/personal/billing) of your Fly.io dashboard
+2. Click "Add Payment Method"
+3. Enter your credit card details
+
+Note: Fly.io offers a free tier, but a payment method is required for account verification.
+
+## 6. Create Your First App
+
+To create and deploy your first app, run:
+
+```bash
+fly launch
+```
+
+Follow the interactive prompts to set up your app.
+
+## 7. Next Steps
+
+- Explore the [Fly.io documentation](https://fly.io/docs/) for more detailed information
+- Join the [Fly.io community](https://community.fly.io/) for support and discussions
+
+Congratulations! You're now ready to use Fly.io for deploying your applications.

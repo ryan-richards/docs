@@ -1,0 +1,71 @@
+---
+title: "Webhooks"
+description: "Testing Stripe Webhooks on Local + Production"
+icon: "webhook"
+---
+
+## Setting Up Stripe Webhook for Testing with ngrok
+
+This guide will help you set up a Stripe webhook for testing purposes using ngrok to create a secure tunnel to your localhost.
+
+### Prerequisites
+
+- A Stripe account
+- Node.js and npm installed
+- ngrok installed (`npm install -g ngrok`)
+- Your application running on `localhost:3000`
+
+### Steps
+
+#### 1. Start Your Local Server
+
+Ensure your application is running on `localhost:3000`.
+
+#### 2. Start ngrok
+
+Open a new terminal window and run:
+
+```bash
+ngrok http 3000
+```
+
+You'll see output similar to this:
+
+```
+Session Status                online
+Account                       your_account_name
+Version                       x.x.x
+Region                        United States (us)
+Forwarding                    http://xxxx-xx-xxx-xxx-xx.ngrok.io -> localhost:3000
+Forwarding                    https://xxxx-xx-xxx-xxx-xx.ngrok.io -> localhost:3000
+```
+
+Copy the HTTPS forwarding URL (e.g., https://xxxx-xx-xxx-xxx-xx.ngrok.io).
+
+#### 3. Configure Stripe Webhook
+
+Log in to your Stripe Dashboard.
+Navigate to Developers > Webhooks.
+Click Add endpoint.
+In the Endpoint URL field, paste your ngrok HTTPS URL and add your webhook route.
+For example: https://xxxx-xx-xxx-xxx-xx.ngrok.io/api/webhook
+Select the events you want to listen for - we just need to listen to checkout success events.
+Click Add endpoint.
+
+#### 4. Get Your Webhook Signing Secret
+
+After creating the webhook:
+
+Click on the newly created webhook in your Stripe Dashboard.
+Look for Signing secret and click Reveal.
+Copy this secret. You'll need it to verify webhook signatures.
+
+#### 5. Set .env for Webhook secret
+
+Copy the webhook sigining secret in your `.env` file for `STRIPE_WEBHOOK_ENDPOINT`
+
+## Ready to test
+
+Remember everytime you want to test locally you will need to have ngrok running. This will likely give you a new tunnel URL which you will have to update in the stripe dashboard.
+
+When you deploy your app you can update the webhook endpoint to your production url /api/webhook

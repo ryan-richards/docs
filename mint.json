@@ -30,35 +30,33 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction", "quickstart"]
     },
     {
-      "group": "Essentials",
+      "group": "Emails + Authenticaiton",
+      "pages": ["emails/resend", "emails/login", "emails/payment"]
+    },
+    {
+      "group": "Stripe Payments",
+      "pages": ["payments/stripe", "payments/seed", "payments/webhook"]
+    },
+    {
+      "group": "Adding Data",
+      "pages": ["datatable/loading-data", "datatable/adding-filters"]
+    },
+    {
+      "group": "Deployment",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "deploy/fly",
+        "deploy/first-deploy",
+        "deploy/github",
+        "deploy/scale",
+        "deploy/tips"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/ryanrichrds",
+    "github": "https://github.com/ryan-richards"
   }
 }

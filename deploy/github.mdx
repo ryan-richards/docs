@@ -1,0 +1,101 @@
+---
+title: "Github Actions"
+description: "Use Github Actions for easy updates"
+icon: "github"
+---
+
+This guide will walk you through the process of setting up a GitHub Actions to easily deploy updates for your Remix app to Fly.io.
+
+## Prerequisites
+
+- A Fly.io account
+- A GitHub repository with a fork of the boringdatabase repository.
+- Flyctl CLI installed and authenticated on your local machine
+
+## Steps
+
+### 1. Generate a Fly.io Access Token
+
+1. Open your terminal at root of the boringdatabase repository
+2. Run the following command:
+
+   ```bash
+   fly tokens create deploy
+   ```
+
+   You can also create a deploy token via the fly dashboard https://fly.io/apps/{your-app-name}/tokens
+
+3. Copy the generated token
+
+### 2. Add the Token to GitHub Secrets
+
+1. Go to your GitHub repository
+2. Click on "Settings" > "Secrets and variables" > "Actions"
+3. Click "New repository secret"
+4. Name: `FLY_API_TOKEN`
+5. Value: Paste the token you copied earlier
+6. Click "Add secret"
+
+### 3. View your GitHub Workflow File
+
+1. In your repository, you will find `.github/workflows/main.yml`
+2. Uncomment the Deploy Production step!
+
+```yaml
+deploy:
+  name: 🚀 Deploy
+  runs-on: ubuntu-22.04
+  needs: [lint, typecheck, vitest]
+  # only build/deploy branches on pushes
+  if: ${{ github.event_name == 'push' }}
+
+  steps:
+    - name: ⬇️ Checkout repo
+      uses: actions/checkout@v4
+
+    - name: 👀 Read app name
+      uses: SebRollen/toml-action@v1.2.0
+      id: app_name
+      with:
+        file: "fly.toml"
+        field: "app"
+
+    - name: 🎈 Setup Fly
+      uses: superfly/flyctl-actions/setup-flyctl@1.5
+
+    - name: 🚀 Deploy Production
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: flyctl deploy --remote-only --build-arg COMMIT_SHA=${{ github.sha }} --app boringdatabase-demo
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+Github will automatically inject your FLY_API_TOKEN during the deploy stage
+
+### 4. Commit and Push
+
+1. Commit the changes in your workflow to git.
+
+### 6. Monitor Deployment
+
+1. Go to your GitHub repository
+2. Click on the "Actions" tab
+3. You should see the "Fly Deploy" workflow running
+
+<img
+  className="block"
+  src="/images/github-action.png"
+  alt="boring database hero light"
+/>
+
+## Troubleshooting
+
+- If the deployment fails, check the workflow logs in the GitHub Actions tab
+- Ensure your `fly.toml` file is correctly configured
+- Verify that your Fly.io account has the necessary permissions and resources
+
+## Additional Resources
+
+- [Fly.io Documentation](https://fly.io/docs/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Remix Documentation](https://remix.run/docs/en/v1)

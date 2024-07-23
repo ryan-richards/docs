@@ -1,0 +1,14 @@
+---
+title: "Authentication"
+description: "How authentication works"
+icon: "user"
+---
+
+## Resend Login
+
+Boringdatabase uses Resend to send authentication emails with one time passcodes and magic links to a user to verfiy login.
+This is not required everytime as session is stored for a period of time.
+
+You might want to modify the email sent to users. You can do that at `app/modules/email/templates/auth-email.tsx`
+
+If you have set `site-config.ts` file you don't need to make changes here.
